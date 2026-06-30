@@ -730,10 +730,6 @@ opacity:.2;
 }
 
 
-  50% {
-    opacity: 1;
-    transform: translate(-50%, -50%) rotate(0deg) translateY(90px);
-  }
 
   /* =========================
    JAMINS HUD V2
