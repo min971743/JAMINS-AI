@@ -1,9 +1,10 @@
 function Scanner() {
-
   return (
-    <div className="scanner"></div>
+    <div className="radar-scanner">
+      <div className="radar-line"></div>
+      <div className="radar-fade"></div>
+    </div>
   );
-
 }
 
 export default Scanner;

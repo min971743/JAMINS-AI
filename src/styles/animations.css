@@ -1,0 +1,130 @@
+.outer-ring {
+  animation: spinSlow 70s linear infinite;
+}
+
+.middle-ring {
+  animation: spinReverse 45s linear infinite;
+}
+
+.inner-ring {
+  animation: spinSlow 28s linear infinite;
+}
+
+.scanner {
+  animation: scanRotate 7s linear infinite;
+}
+
+.core-ring-1 {
+  animation: spinSlow 10s linear infinite;
+}
+
+.core-ring-2 {
+  animation: spinReverse 6s linear infinite;
+}
+
+.core-center {
+  animation: corePulse 1.8s ease-in-out infinite;
+}
+
+.core-glow {
+  animation: glowBreath 2.8s ease-in-out infinite;
+}
+
+.particle {
+  animation: particlePulse 2s ease-in-out infinite;
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinReverse {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes scanRotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes corePulse {
+  0%,
+  100% {
+    transform: scale(1);
+    filter: hue-rotate(0deg);
+  }
+
+  50% {
+    transform: scale(1.18);
+    filter: hue-rotate(38deg);
+  }
+}
+
+@keyframes glowBreath {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.96);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+}
+
+@keyframes particlePulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.tick-ring {
+  animation: spinReverse 90s linear infinite;
+}
+
+.radar-scanner {
+  animation: spinSlow 5.5s linear infinite;
+}
+
+.energy-ring-1{
+    animation:spinSlow 10s linear infinite;
+}
+
+.energy-ring-2{
+    animation:spinReverse 5s linear infinite;
+}
+
+.energy-ring-3{
+    animation:spinSlow 3s linear infinite;
+}
+
+.core-dot{
+    animation:particlePulse 1.8s ease-in-out infinite;
+}
+
+.particle-orbit {
+  animation: spinSlow 18s linear infinite;
+}

@@ -1,0 +1,194 @@
+.ai-core {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.core-glow {
+  position: absolute;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(0,255,255,.25),
+    rgba(0,120,255,.12),
+    transparent 75%
+  );
+  filter: blur(14px);
+}
+
+.core-ring {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.core-ring-1 {
+  width: 170px;
+  height: 170px;
+  border: 2px solid rgba(0,255,255,.65);
+}
+
+.core-ring-2 {
+  width: 115px;
+  height: 115px;
+  border: 2px dashed rgba(255,0,220,.75);
+}
+
+.core-center {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    #ffffff,
+    #00fff0 35%,
+    #0077ff 70%,
+    rgba(255,0,220,.7)
+  );
+
+  box-shadow:
+    0 0 18px #00fff0,
+    0 0 45px #0077ff,
+    0 0 80px #00fff0;
+}
+
+.chat-panel {
+  position: absolute;
+  bottom: 34px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 560px;
+  padding: 18px;
+  border: 1px solid rgba(0, 255, 255, 0.28);
+  border-radius: 18px;
+  background: rgba(0, 20, 32, 0.42);
+  box-shadow: 0 0 28px rgba(0, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  color: #dfffff;
+  z-index: 80;
+}
+
+.chat-header {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #7dfff7;
+  margin-bottom: 12px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00fff0;
+  box-shadow: 0 0 12px #00fff0;
+}
+
+.chat-message {
+  font-size: 15px;
+  margin-bottom: 14px;
+  opacity: 0.9;
+}
+
+.chat-input-box {
+  display: flex;
+  gap: 8px;
+}
+
+.chat-input-box input {
+  flex: 1;
+  height: 40px;
+  border: 1px solid rgba(0, 255, 255, 0.22);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.32);
+  color: #eaffff;
+  padding: 0 14px;
+  outline: none;
+}
+
+.chat-input-box button {
+  width: 72px;
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #00fff0, #0077ff);
+  color: #00141a;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.main-hud-area {
+  position: absolute;
+  top: 56%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.78);
+  z-index: 10;
+}
+
+.command-bar {
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  width: min(760px, calc(100vw - 40px));
+  padding: 18px;
+  border: 1px solid rgba(0, 255, 255, 0.28);
+  border-radius: 18px;
+  background: rgba(0, 18, 30, 0.62);
+  box-shadow: 0 0 34px rgba(0, 255, 255, 0.14);
+  backdrop-filter: blur(14px);
+  z-index: 40;
+  color: #dfffff;
+}
+
+.command-status {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #6efff7;
+  margin-bottom: 8px;
+}
+
+.command-message {
+  font-size: 14px;
+  opacity: 0.86;
+  margin-bottom: 12px;
+}
+
+.command-input-row {
+  display: flex;
+  gap: 10px;
+}
+
+.command-input-row input {
+  flex: 1;
+  height: 42px;
+  border: 1px solid rgba(0, 255, 255, 0.24);
+  border-radius: 12px;
+  padding: 0 14px;
+  outline: none;
+  background: rgba(0, 0, 0, 0.38);
+  color: #eaffff;
+}
+
+.command-input-row input::placeholder {
+  color: rgba(220, 255, 255, 0.45);
+}
+
+.command-input-row button {
+  width: 78px;
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #00fff0, #006dff);
+  color: #00141a;
+  font-weight: 900;
+  cursor: pointer;
+}
