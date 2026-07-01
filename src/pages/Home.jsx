@@ -2,10 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import Background from "../components/Background";
 import HudCore from "../components/Hud/HudCore";
 import { askJamins } from "../api/chat";
-import ReactMarkdown from "react-markdown";
+import ChatPanel from "../components/Chat/ChatPanel";
+import SystemPanel from "../components/System/SystemPanel";
 
 function Home() {
   const [input, setInput] = useState("");
+  const [status, setStatus] = useState("READY");
+
   const [messages, setMessages] = useState([
     { role: "ai", text: "안녕하세요 팀장님. 무엇을 도와드릴까요?" },
   ]);
@@ -27,75 +30,59 @@ function Home() {
     ]);
 
     setInput("");
+    setStatus("THINKING...");
 
-    const reply = await askJamins(text);
+    try {
+      const reply = await askJamins(text);
 
-    setMessages((prev) => [
-      ...prev.slice(0, -1),
-      { role: "ai", text: reply },
-    ]);
+      setStatus("RESPONDING...");
+
+      setMessages((prev) => [
+        ...prev.slice(0, -1),
+        { role: "ai", text: reply },
+      ]);
+
+      setTimeout(() => {
+        setStatus("READY");
+      }, 800);
+    } catch (error) {
+      setStatus("ERROR");
+
+      setMessages((prev) => [
+        ...prev.slice(0, -1),
+        { role: "ai", text: "팀장님, 서버 연결 중 오류가 발생했습니다." },
+      ]);
+    }
   };
 
   return (
-    <main className="jamins-screen">
-      <Background />
+  <main className="jamins-screen">
+    <Background />
 
-      <section className="jamins-left">
-        <div className="chat-card">
-          <div className="chat-header">
-            <span className="status-dot"></span>
-            <span>JAMINS</span>
-          </div>
+    <ChatPanel
+      messages={messages}
+      input={input}
+      setInput={setInput}
+      sendMessage={sendMessage}
+      chatEndRef={chatEndRef}
+    />
 
-          <div className="chat-log">
-            {messages.map((msg, index) => (
-              <div key={index} className={`chat-line ${msg.role}`}>
-                <span>{msg.role === "ai" ? "JAMINS" : "TEAM"}</span>
+    <section className="jamins-center">
+      <HudCore />
 
-                <div className="message-text">
-                  <ReactMarkdown>{msg.text}</ReactMarkdown>
-                </div>
-              </div>
-            ))}
-            <div ref={chatEndRef}></div>
-          </div>
+      <div className="hud-title">
+        <h1>JAMINS-AI</h1>
 
-          <div className="command-input-row">
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") sendMessage();
-              }}
-              placeholder="명령을 입력하세요..."
-            />
-
-            <button type="button" onClick={sendMessage}>
-              ➤
-            </button>
-          </div>
+        <div className={`hud-ready ${status.toLowerCase().replace(".", "")}`}>
+          ● {status}
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section className="jamins-center">
-        <HudCore />
+    <SystemPanel />
 
-        <div className="hud-title">
-          <h1>JAMINS-AI</h1>
-          <div className="hud-ready">● READY</div>
-        </div>
-      </section>
-
-      <section className="jamins-right">
-        <div className="status-card">
-          <h3>SYSTEM</h3>
-          <p>GPT ONLINE</p>
-          <p>MEMORY READY</p>
-          <p>VOICE STANDBY</p>
-        </div>
-      </section>
-    </main>
-  );
+  </main>
+);
 }
 
 export default Home;
