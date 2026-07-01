@@ -256,3 +256,237 @@
     transform: translateY(0);
   }
 }
+
+/* ===============================
+   Sprint 9 - Chat Bubble Upgrade
+   =============================== */
+
+.chat-line {
+  margin-bottom: 20px;
+}
+
+.chat-line.ai {
+  align-items: flex-start;
+}
+
+.chat-line.user {
+  align-items: flex-end;
+  margin-left: auto;
+ width: fit-content;
+ max-width: 90%;
+}
+
+.chat-line.user span {
+  text-align: right;
+  width: 100%;
+}
+
+.chat-line.ai .message-text {
+  max-width: 88%;
+  border-radius: 4px 16px 16px 16px;
+  border-left: 3px solid #00f5ff;
+}
+
+.chat-line.user .message-text {
+  max-width: 88%;
+  border-radius: 16px 4px 16px 16px;
+  border-right: 3px solid #ff4fd8;
+  text-align: left;
+}
+
+.message-text {
+  position: relative;
+  backdrop-filter: blur(6px);
+}
+
+.chat-line.ai .message-text::before {
+  content: "";
+  position: absolute;
+  left: -8px;
+  top: 12px;
+  width: 8px;
+  height: 8px;
+  border-left: 1px solid rgba(0, 245, 255, 0.6);
+  border-bottom: 1px solid rgba(0, 245, 255, 0.6);
+  transform: rotate(45deg);
+  background: rgba(0, 20, 30, 0.9);
+}
+
+.chat-line.user .message-text::before {
+  content: "";
+  position: absolute;
+  right: -8px;
+  top: 12px;
+  width: 8px;
+  height: 8px;
+  border-right: 1px solid rgba(255, 79, 216, 0.7);
+  border-bottom: 1px solid rgba(255, 79, 216, 0.7);
+  transform: rotate(-45deg);
+  background: rgba(25, 0, 25, 0.9);
+}
+
+.chat-log::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-log::-webkit-scrollbar-track {
+  background: rgba(0, 245, 255, 0.06);
+  border-radius: 999px;
+}
+
+.chat-log::-webkit-scrollbar-thumb {
+  background: rgba(0, 245, 255, 0.55);
+  border-radius: 999px;
+  box-shadow: 0 0 12px rgba(0, 245, 255, 0.8);
+}
+
+.chat-log::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 245, 255, 0.9);
+}
+
+.hud-ready.ready{
+    color:#00ffe7;
+}
+
+.hud-ready.thinking{
+    color:#ffd000;
+}
+
+.hud-ready.responding{
+    color:#46b7ff;
+}
+
+.hud-ready.error{
+    color:#ff4a4a;
+}
+
+.local-ai-status{
+    margin-top:14px;
+    font-size:13px;
+    letter-spacing:3px;
+    color:#7ffbff;
+    opacity:.85;
+}
+
+/* ===============================
+   Sprint 10 - UI Fine Tuning
+   =============================== */
+
+/* TEAM 말풍선 너무 좁아지는 문제 해결 */
+.chat-line.user .message-text {
+  min-width: 90px;
+  max-width: 78%;
+}
+
+/* JAMINS 말풍선 폭 살짝 정리 */
+.chat-line.ai .message-text {
+  max-width: 86%;
+}
+
+/* 채팅 헤더 선 은은하게 */
+.chat-header {
+  border-bottom-color: rgba(0, 245, 255, 0.16);
+}
+
+/* HUD 상태 간격 조정 */
+.hud-ready {
+  margin-top: 12px;
+}
+
+.local-ai-status {
+  margin-top: 8px;
+}
+
+/* 입력창 네온 강화 */
+.command-input-row {
+  box-shadow: inset 0 1px 0 rgba(0, 245, 255, 0.18);
+}
+
+.command-input-row input {
+  box-shadow: inset 0 0 18px rgba(0, 245, 255, 0.08);
+}
+
+.command-input-row input:focus {
+  box-shadow:
+    0 0 20px rgba(0, 245, 255, 0.45),
+    inset 0 0 18px rgba(0, 245, 255, 0.14);
+}
+
+/* 전송 버튼 눌리는 느낌 */
+.command-input-row button:active {
+  transform: scale(0.94);
+}
+
+.chat-line.ai .message-text.typing::after {
+  content: "▌";
+  margin-left: 4px;
+  color: #00f5ff;
+  animation: cursorBlink 0.8s infinite;
+}
+
+@keyframes cursorBlink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+/* ===============================
+   Sprint 12 - JARVIS Animation Pack
+   =============================== */
+
+.jamins-center.thinking {
+  filter: drop-shadow(0 0 30px rgba(255, 216, 77, 0.45));
+}
+
+.jamins-center.responding {
+  filter: drop-shadow(0 0 38px rgba(0, 245, 255, 0.7));
+}
+
+.jamins-center.error {
+  filter: drop-shadow(0 0 38px rgba(255, 74, 74, 0.75));
+}
+
+.chat-line.ai {
+  animation: slideFromLeft 0.28s ease-out;
+}
+
+.chat-line.user {
+  animation: slideFromRight 0.28s ease-out;
+}
+
+@keyframes slideFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.command-input-row:focus-within {
+  box-shadow:
+    inset 0 1px 0 rgba(0, 245, 255, 0.3),
+    0 0 22px rgba(0, 245, 255, 0.2);
+}
+
+.command-input-row button:active {
+  box-shadow:
+    0 0 34px rgba(0, 245, 255, 0.9),
+    inset 0 0 16px rgba(0, 245, 255, 0.35);
+}

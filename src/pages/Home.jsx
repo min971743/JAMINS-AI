@@ -19,6 +19,21 @@ function Home() {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const typeReply = async (reply) => {
+    let currentText = "";
+
+    for (let i = 0; i < reply.length; i++) {
+      currentText += reply[i];
+
+      setMessages((prev) => [
+        ...prev.slice(0, -1),
+        { role: "ai", text: currentText },
+      ]);
+
+      await new Promise((resolve) => setTimeout(resolve, 12));
+    }
+  };
+
   const sendMessage = async () => {
     const text = input.trim();
     if (!text) return;
@@ -26,7 +41,7 @@ function Home() {
     setMessages((prev) => [
       ...prev,
       { role: "user", text },
-      { role: "ai", text: "생각 중입니다..." },
+      { role: "ai", text: "" },
     ]);
 
     setInput("");
@@ -36,11 +51,7 @@ function Home() {
       const reply = await askJamins(text);
 
       setStatus("RESPONDING...");
-
-      setMessages((prev) => [
-        ...prev.slice(0, -1),
-        { role: "ai", text: reply },
-      ]);
+      await typeReply(reply);
 
       setTimeout(() => {
         setStatus("READY");
@@ -56,33 +67,35 @@ function Home() {
   };
 
   return (
-  <main className="jamins-screen">
-    <Background />
+    <main className="jamins-screen">
+      <Background />
 
-    <ChatPanel
-      messages={messages}
-      input={input}
-      setInput={setInput}
-      sendMessage={sendMessage}
-      chatEndRef={chatEndRef}
-    />
+      <ChatPanel
+        messages={messages}
+        input={input}
+        setInput={setInput}
+        sendMessage={sendMessage}
+        chatEndRef={chatEndRef}
+        status={status}
+      />
 
-    <section className="jamins-center">
-      <HudCore />
+      <section className={`jamins-center ${status.toLowerCase().replace(".", "")}`}>
+        <HudCore />
 
-      <div className="hud-title">
-        <h1>JAMINS-AI</h1>
+        <div className="hud-title">
+          <h1>JAMINS-AI</h1>
 
-        <div className={`hud-ready ${status.toLowerCase().replace(".", "")}`}>
-          ● {status}
+          <div className={`hud-ready ${status.toLowerCase().replace(".", "")}`}>
+            ● {status}
+          </div>
+
+          <div className="local-ai-status">LOCAL AI READY</div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <SystemPanel />
-
-  </main>
-);
+      <SystemPanel />
+    </main>
+  );
 }
 
 export default Home;
